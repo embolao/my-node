@@ -4,8 +4,11 @@ const exphbs = require('express-handlebars');
 const morgan = require ('morgan');
 const multer = require('multer');
 const express = require('express');
+const erroHandler = require('errorhandler');
 
 const routes = require('../routes/index');
+
+
 
 module.exports = app => {
     //Setting
@@ -28,6 +31,10 @@ module.exports = app => {
     routes(app);
     //Static files
     app.use('/public', express.static(path.join(__dirname, '../public')));
+    //Errorhandlers
+    if('development' === app.get('env')){
+        app.use(erroHandler);
+    }
 
 
 
