@@ -26,6 +26,8 @@ module.exports = app => {
     app.use(express.json());
     //Routes
     routes(app);
+    //Static files
+    app.use('/public', express.static(path.join(__dirname, '../public')));
 
 
 
