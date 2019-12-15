@@ -5,6 +5,8 @@ const morgan = require ('morgan');
 const multer = require('multer');
 const express = require('express');
 
+const routes = require('../routes/index');
+
 module.exports = app => {
     //Setting
     app.set('port', process.env.PORT || 3000);
@@ -22,6 +24,9 @@ module.exports = app => {
     app.use(multer({dest: path.join(__dirname, '../public/upload/temp')}).single('image'));
     app.use(express.urlencoded({extended:false}));
     app.use(express.json());
+    //Routes
+    routes(app);
+
 
 
     return app;
