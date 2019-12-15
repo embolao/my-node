@@ -1,6 +1,10 @@
 const path = require('path');
 const exphbs = require('express-handlebars');
 
+const morgan = require ('morgan');
+const multer = require('multer');
+const express = require('express');
+
 module.exports = app => {
     //Setting
     app.set('port', process.env.PORT || 3000);
@@ -13,6 +17,12 @@ module.exports = app => {
         helpers: require('./helpers')
     }));
     app.set('view engine ', '.hbs');
+    //Middlewares
+    app.use(morgan('dev'));
+    app.use(multer({dest: path.join(__dirname, '../public/upload/temp')}).single('image'));
+    app.use(express.urlencoded({extended:false}));
+    app.use(express.json());
+
 
     return app;
 };
