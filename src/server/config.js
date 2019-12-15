@@ -13,7 +13,7 @@ const routes = require('../routes/index');
 module.exports = app => {
     //Setting
     app.set('port', process.env.PORT || 3000);
-    app.set('views', path.join(__dirname, 'views'));
+    app.set('views', path.join(__dirname, '../views'));
     app.engine('.hbs', exphbs({
         defaultLayout: 'main',
         partialsDir: path.join(app.get('views'), 'partials'),
@@ -21,7 +21,7 @@ module.exports = app => {
         extname: '.hbs',
         helpers: require('./helpers')
     }));
-    app.set('view engine ', '.hbs');
+    app.set('view engine', '.hbs');
     //Middlewares
     app.use(morgan('dev'));
     app.use(multer({dest: path.join(__dirname, '../public/upload/temp')}).single('image'));
